@@ -1,0 +1,36 @@
+//使用媒体查询和mixin（混合）
+.border-1px {
+    border-bottom-style: solid;
+    border-color: rgba(7,17,27,0.1);
+    border-width: 1px;
+}
+@bg2x: "@2x.png";
+@bg2x: "@3x.png";
+
+.bg-img(@name) {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("@{name}@{bg2x}"); 
+    //less中字符拼接的写法
+        //"@{name}@{bg2x}" 调用方式全部写成字符串
+        //@{name}  通过@+{属性名} 的方式调用定义的变量
+    //  ../../components/header/brand@2x.png
+}
+//媒体查询 判断设备像素比 2
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+    .border-1px {
+        border-width: 0.5;
+    }
+    .bg-img(@name) {
+        background-image: url("@{name}@{bg2x}");
+    }
+}
+//媒体查询 判断设备像素比 3
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+    .border-1px {
+        border-width: 0.333px;
+    }
+    .bg-img(@name) {
+        background-image: url("@{name}@{bg3x}");
+    }
+}
